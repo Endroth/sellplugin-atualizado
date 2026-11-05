@@ -1,0 +1,268 @@
+# ===== SellPlugin =====
+# Dinheiro: usa o Vault (se o seu plugin de economia estiver ligado ao Vault).
+# Se NÃO tiver Vault, usa o comando abaixo, executado pelo console.
+# Placeholders: {player} e {amount}
+fallback-command: "eco give {player} {amount}"
+
+# Vende automaticamente ao fechar o menu com ESC
+sell-on-close: true
+
+# Som ao vender (nome do som do Minecraft; veja a lista na wiki)
+# Exemplos: entity.experience_orb.pickup | entity.player.levelup | block.note_block.pling | entity.arrow.hit_player
+sound:
+  enabled: true
+  name: "entity.experience_orb.pickup"
+  volume: 1.0
+  pitch: 1.2
+
+# Valor do item ao passar o mouse (tooltip). Cores com &
+# Placeholders: {price} = valor de 1 item, {amount} = quantidade, {total} = valor da pilha
+tooltip:
+  line-price: "&7Vale: &a{price} &7cada"
+  line-stack: "&7Pilha (&f{amount}&7): &a{total}"
+  line-unsellable: "&cNão pode ser vendido"
+  show-stack-line: true
+  show-unsellable: true
+  # Mostrar também no criativo? (PERIGO: no criativo o item pode ficar com a linha de valor de verdade)
+  allow-creative: false
+
+# Bônus por encantamento: cada encantamento soma % pelo nível dele.
+# Ex.: Afiação V (+95%) + Inquebrável III (+60%) = +155% no preço.
+# Nível maior que o último definido usa o último valor.
+enchant-bonus:
+  enabled: true
+  cap-percent: 400   # limite do bônus total (400 = no máximo 5x o preço base)
+  percent-by-level:
+    1: 20
+    2: 40
+    3: 60
+    4: 80
+    5: 95
+
+# Shulker box vende: preço da caixa (em price-patterns) + o valor de tudo que está dentro dela.
+# Itens dentro que não vendem (bloqueados) são perdidos junto com a caixa.
+shulker-includes-contents: true
+# Preço da caixa em si (usado se não houver preço de shulker em prices/price-patterns)
+shulker-box-price: 1000
+
+# Preço dos itens que NÃO estão na lista "prices" (0 = não vende).
+default-price: 1
+
+# Preços especiais (dependem de encantamento)
+special:
+  bow: 100
+  bow-flame: 12000
+  crossbow: 100
+  crossbow-quick-charge: 10000
+  machado-vendedor: 50000   # preço do MachadoVendedor (SellAxe), mais caro que o machado normal
+
+# Preço por LIVRO encantado (encantamento + nível). Livros sem preço aqui usam "ENCHANTED_BOOK" + bônus.
+# Formato:  nome_do_encantamento: { nível: preço }
+# Dá para editar no jogo: segure o livro e use /sell setprice hand <preço>
+#   ou /sell setprice book <encantamento> <nível> <preço>
+book-prices: {}
+#  swift_sneak: { 3: 8000 }
+#  mending: { 1: 5000 }
+
+# Itens que nunca vendem. "*_CARPET" = qualquer item terminando em _CARPET
+blocked:
+  - "*RAIL"
+  - "*_CARPET"
+  - "*SPAWN_EGG"
+  - BUNDLE
+  - BEDROCK
+  - BARRIER
+  - LIGHT
+  - STRUCTURE_VOID
+  - STRUCTURE_BLOCK
+  - JIGSAW
+  - COMMAND_BLOCK
+  - CHAIN_COMMAND_BLOCK
+  - REPEATING_COMMAND_BLOCK
+  - COMMAND_BLOCK_MINECART
+  - DEBUG_STICK
+  - KNOWLEDGE_BOOK
+  - REINFORCED_DEEPSLATE
+  - SPAWNER
+  - TRIAL_SPAWNER
+  - VAULT
+  - END_PORTAL_FRAME
+  - PETRIFIED_OAK_SLAB
+  - FARMLAND
+  - DIRT_PATH
+
+# Preços por unidade (ajuste à vontade)
+prices:
+  # --- pedidos do dono ---
+  TOTEM_OF_UNDYING: 7000
+  APPLE: 60
+  CARROT: 30
+  IRON_INGOT: 15
+  CACTUS: 20
+  BAMBOO: 3
+  NETHERITE_INGOT: 2800
+  EMERALD: 35
+  GOLD_INGOT: 28
+  DIAMOND: 135
+
+  # --- blocos de minério (9x o item) ---
+  IRON_BLOCK: 135
+  GOLD_BLOCK: 252
+  EMERALD_BLOCK: 315
+  DIAMOND_BLOCK: 1215
+  NETHERITE_BLOCK: 25200
+
+  # --- minérios e materiais ---
+  COAL: 6
+  CHARCOAL: 5
+  COAL_BLOCK: 54
+  COPPER_INGOT: 6
+  RAW_IRON: 12
+  RAW_GOLD: 22
+  RAW_COPPER: 4
+  LAPIS_LAZULI: 8
+  REDSTONE: 5
+  QUARTZ: 8
+  AMETHYST_SHARD: 10
+  GOLD_NUGGET: 3
+  IRON_NUGGET: 2
+  NETHERITE_SCRAP: 650
+  ANCIENT_DEBRIS: 600
+  NETHERITE_UPGRADE_SMITHING_TEMPLATE: 8000
+  # --- farm ---
+  WHEAT: 6
+  POTATO: 12
+  BEETROOT: 8
+  SUGAR_CANE: 8
+  PUMPKIN: 12
+  MELON_SLICE: 3
+  MELON: 27
+  SEA_PICKLE: 25
+  KELP: 4
+  NETHER_WART: 18
+  COCOA_BEANS: 10
+  SWEET_BERRIES: 6
+  GLOW_BERRIES: 8
+  GOLDEN_CARROT: 150
+  GOLDEN_APPLE: 400
+  ENCHANTED_GOLDEN_APPLE: 12800
+  # --- mobs ---
+  ROTTEN_FLESH: 1
+  BONE: 3
+  STRING: 3
+  GUNPOWDER: 8
+  SPIDER_EYE: 4
+  ENDER_PEARL: 40
+  BLAZE_ROD: 45
+  GHAST_TEAR: 240
+  SLIME_BALL: 15
+  SHULKER_SHELL: 480
+  PHANTOM_MEMBRANE: 30
+  WITHER_SKELETON_SKULL: 9600
+  NETHER_STAR: 24000
+  DRAGON_HEAD: 19200
+  DRAGON_EGG: 160000
+  HEART_OF_THE_SEA: 4800
+  NAUTILUS_SHELL: 150
+  TRIDENT: 9600
+  ELYTRA: 80000
+  BEACON: 64000
+  CONDUIT: 16000
+  ENCHANTED_BOOK: 120
+  EXPERIENCE_BOTTLE: 60
+  ECHO_SHARD: 2400
+  DISC_FRAGMENT_5: 960
+  MUSIC_DISC_PIGSTEP: 6400
+  MUSIC_DISC_OTHERSIDE: 4000
+  # --- ferramentas/armas/armaduras ---
+  DIAMOND_SWORD: 300
+  DIAMOND_PICKAXE: 450
+  DIAMOND_AXE: 450
+  DIAMOND_SHOVEL: 170
+  DIAMOND_HOE: 300
+  DIAMOND_HELMET: 700
+  DIAMOND_CHESTPLATE: 1100
+  DIAMOND_LEGGINGS: 1000
+  DIAMOND_BOOTS: 570
+  NETHERITE_SWORD: 3500
+  NETHERITE_PICKAXE: 3700
+  NETHERITE_AXE: 3700
+  NETHERITE_SHOVEL: 3000
+  NETHERITE_HOE: 3400
+  NETHERITE_HELMET: 4200
+  NETHERITE_CHESTPLATE: 5000
+  NETHERITE_LEGGINGS: 4800
+  NETHERITE_BOOTS: 4000
+  MACE: 24000
+  SHIELD: 40
+  ARROW: 2
+
+  # --- blocos comuns (baratos) ---
+  DIRT: 1
+  COBBLESTONE: 1
+  STONE: 1
+  DEEPSLATE: 1
+  COBBLED_DEEPSLATE: 1
+  NETHERRACK: 1
+  SAND: 1
+  GRAVEL: 1
+  OAK_LOG: 3
+  SPRUCE_LOG: 3
+  BIRCH_LOG: 3
+  JUNGLE_LOG: 3
+  ACACIA_LOG: 3
+  DARK_OAK_LOG: 3
+  MANGROVE_LOG: 3
+  CHERRY_LOG: 3
+  OBSIDIAN: 25
+  CRYING_OBSIDIAN: 60
+  END_STONE: 2
+  GLOWSTONE_DUST: 4
+  GLOWSTONE: 16
+  PRISMARINE_SHARD: 4
+  PRISMARINE_CRYSTALS: 5
+  SPONGE: 120
+  SCULK_CATALYST: 640
+  SCULK_SHRIEKER: 480
+  # --- raridade: quanto mais raro, mais caro ---
+  GILDED_BLACKSTONE: 4000
+  MUSIC_DISC_RELIC: 4000
+  HEAVY_CORE: 12800
+  OMINOUS_TRIAL_KEY: 3200
+  TRIAL_KEY: 960
+  OMINOUS_BOTTLE: 1280
+  BREEZE_ROD: 120
+  WIND_CHARGE: 15
+  SNIFFER_EGG: 4800
+  TURTLE_EGG: 320
+  ARMADILLO_SCUTE: 80
+  TURTLE_SCUTE: 80
+  DIAMOND_HORSE_ARMOR: 960
+  GOLDEN_HORSE_ARMOR: 150
+  IRON_HORSE_ARMOR: 100
+  SADDLE: 640
+  NAME_TAG: 480
+  END_CRYSTAL: 800
+  RESPAWN_ANCHOR: 640
+  LODESTONE: 1920
+  ENCHANTING_TABLE: 1440
+  ENDER_EYE: 90
+  DRAGON_BREATH: 480
+  WET_SPONGE: 130
+  DIAMOND_ORE: 140
+  DEEPSLATE_DIAMOND_ORE: 145
+  EMERALD_ORE: 40
+  DEEPSLATE_EMERALD_ORE: 42
+  GOLD_ORE: 30
+  IRON_ORE: 16
+  WITHER_ROSE: 640
+  ENDER_CHEST: 240
+# Preços por padrão (vale p/ vários itens de uma vez; preço exato em "prices" ganha).
+# "*X" = termina com X | "X*" = começa com X
+price-patterns:
+  "*SHULKER_BOX": 1000
+  "MUSIC_DISC_*": 1920
+  "*_ARMOR_TRIM_SMITHING_TEMPLATE": 2400
+  "*_POTTERY_SHERD": 480
+  "*_BANNER_PATTERN": 200
+  "*_HORSE_ARMOR": 100

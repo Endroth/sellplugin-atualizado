@@ -1,0 +1,24 @@
+name: SellPlugin
+version: 2.0
+main: com.servidor.sell.SellPlugin
+api-version: '1.21'
+softdepend: [Vault]
+commands:
+  sell:
+    description: Abre o menu de venda
+    usage: /sell [price|setprice|venderesc|reload]
+    aliases: [vendermenu]
+  valoritem:
+    description: Liga/desliga o valor do item ao passar o mouse (só para você)
+    usage: /valoritem
+    aliases: [itemworth]
+permissions:
+  sell.use:
+    description: Usar o /sell
+    default: true
+  sell.worth:
+    description: Ver o valor dos itens ao passar o mouse
+    default: true
+  sell.admin:
+    description: Editar preços e recarregar
+    default: op
