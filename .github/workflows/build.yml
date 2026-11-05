@@ -1,4 +1,4 @@
-name: Build sellplugin
+name: Build SellAxe
 
 on:
   push:
@@ -27,5 +27,5 @@ jobs:
         uses: actions/upload-artifact@v5
         with:
           name: SellAxe
-          path: target/Sellplugin-*.jar
+          path: target/SellAxe-*.jar
           if-no-files-found: error
